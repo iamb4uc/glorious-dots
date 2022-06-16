@@ -11,8 +11,8 @@ super + {d,x}
 	{dmenu_run,lxsession-logout}
 
 # application launchers
-super + shift + {w,e,f,k}
-	{librewolf,geany,thunar,keepassxc}
+super + shift + {w,e,f}
+	{librewolf,geany,pcmanfm}
 super + {n,h}
 	{st -e ncdu,st -e htop}
 
