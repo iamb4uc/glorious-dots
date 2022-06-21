@@ -11,10 +11,10 @@ super + {d,x}
 	{dmenu_run,lxsession-logout}
 
 # application launchers
-super + shift + {w,e,f}
-	{librewolf,geany,pcmanfm}
-super + {n,h}
-	{st -e ncdu,st -e htop}
+super + shift + {w,e,f,t,s}
+	{librewolf,geany,pcmanfm,telegram-desktop,signal-desktop}
+super + {n,h,r}
+	{st -e ncdu,st -e htop,st -e ranger}
 
 # make sxhkd reload its configuration files:
 super + Escape
