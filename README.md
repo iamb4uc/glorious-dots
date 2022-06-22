@@ -7,3 +7,6 @@ All of my dots in one place.
 ```shell
 pacman -S opendoas bspwm neofetch t polybar sxhkd zsh zsh-completions
 ```
+
+# Void Linux
+
