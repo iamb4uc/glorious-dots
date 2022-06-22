@@ -2,19 +2,19 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int vertpad            = 7;       /* vertical padding of bar */
-static const int sidepad            = 7;       /* horizontal padding of bar */
-static const int user_bh            = 30;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static const char *fonts[]          = { "monospace:size=12:antialias=true:autohint=true", "fa:size=12:antialias=true:autohint=true" };
-static const char dmenufont[]       = "monospace:size=12:antialias=true";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const int user_bh            = 35;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+
+static const char *fonts[]          = { "RobotoMono Nerd Font:size=12:antialias=true:autohint=true", "FontAwesome:size=12:antialias=true:autohint=true" };
+static const char dmenufont[]       = "RobotoMono Nerd Font:size=12:antialias=true";
+static const char col_gray1[]       = "#1d2021";
+static const char col_gray2[]       = "#fbf1c7";
+static const char col_gray3[]       = "#689d6a";
+static const char col_gray4[]       = "#b8bb26";
+static const char col_cyan[]        = "#32302f";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -22,7 +22,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "", "", ""};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -30,25 +30,26 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
-/* application shortcuts */
-static const char *web[] = { "/usr/bin/librewolf", NULL };
-static const char *filemanager[] = { "/usr/bin/thunar", NULL };
-static const char *discord[] = { "/usr/bin/discord", NULL };
+/* application launchers*/
+static const char *web[] = { "/usr/bin/firefox", NULL };
+static const char *file[] = { "/usr/bin/thunar", NULL };
+static const char *vm[] = { "/usr/bin/virt-manager", NULL };
+static const char *sgnl[] = { "/usr/bin/signal-desktop", NULL };
 static const char *pass[] = { "/usr/bin/keepassxc", NULL };
 static const char *ide[] = { "/usr/bin/geany", NULL };
-static const char *chat[] = { "/usr/bin/telegram-desktop", NULL };
+static const char *pavucontrol[] = { "/usr/bin/pavucontrol", NULL };
 static const char *esession[] = { "/usr/bin/lxsession-logout", NULL };
-
+static const char *office[] = { "/usr/bin/libreoffice", NULL };
+static const char *chat[] = { "/usr/bin/telegram-desktop", NULL };
+static const char *lock[] = { "/usr/local/bin/slock", NULL };
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -77,13 +78,17 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = web} },
-	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = filemanager} },
-	{ MODKEY|ShiftMask,             XK_d,      spawn,          {.v = discord} },
-	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = pass} },
-	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = ide} },
-	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = chat} },
-	{ MODKEY,                       XK_x,      spawn,          {.v = esession} },
+	{ ControlMask,                  XK_l,      spawn,          {.v = lock } },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = web } },
+	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = pass } },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = ide } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = pavucontrol } },
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = chat } },
+	{ MODKEY|ShiftMask,             XK_v,      spawn,          {.v = vm } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = office } },
+	{ MODKEY,                       XK_x,      spawn,          {.v = esession } },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = file } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = sgnl } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -105,6 +110,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -113,7 +121,6 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
