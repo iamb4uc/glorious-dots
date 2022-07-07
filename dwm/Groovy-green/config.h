@@ -9,7 +9,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 35;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 
 static const char *fonts[]          = { "RobotoMono Nerd Font:size=12:antialias=true:autohint=true", "FontAwesome:size=12:antialias=true:autohint=true" };
-static const char dmenufont[]       = "monospace:size=12:antialias=true";
+static const char dmenufont[]       = "RobotoMono Nerd Font:size=12:antialias=true";
 static const char col_gray1[]       = "#1d2021";
 static const char col_gray2[]       = "#fbf1c7";
 static const char col_gray3[]       = "#689d6a";
@@ -22,7 +22,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", ""};
+static const char *tags[] = { "1", "2", "3", "4", "5"};
 
 static const Rule rules[] = {
 	/* xprop(1):
